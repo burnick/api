@@ -3,6 +3,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { User } from './models/user.models';
 
 @Injectable()
 export class UsersService {
@@ -16,9 +17,17 @@ export class UsersService {
     if (user) {
       throw new BadRequestException('Existing User');
     }
+
+    const username = createUserInput.email.split('@');
+
+    if (!username[0]) {
+      throw new BadRequestException('Wrong Email Format');
+    }
+
     return await this.prisma.user.create({
       data: {
         ...createUserInput,
+        name: username[0],
         roles: {
           connectOrCreate: {
             where: { name: 'User' },
@@ -37,7 +46,7 @@ export class UsersService {
     });
   }
 
-  async findOne(email: string) {
+  async findOne(email: string): Promise<User> {
     return await this.prisma.user.findUniqueOrThrow({
       where: {
         email,
