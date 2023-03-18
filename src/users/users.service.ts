@@ -19,12 +19,22 @@ export class UsersService {
     return await this.prisma.user.create({
       data: {
         ...createUserInput,
+        roles: {
+          connectOrCreate: {
+            where: { name: 'User' },
+            create: { name: 'User' },
+          },
+        },
       },
     });
   }
 
   async findAll() {
-    return await this.prisma.user.findMany();
+    return await this.prisma.user.findMany({
+      include: {
+        roles: true, // Return all fields
+      },
+    });
   }
 
   async findOne(email: string) {

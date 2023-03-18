@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int, Context } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { User } from './models/user.models';
 // /import { CreateUserInput } from './dto/create-user.input';
@@ -36,6 +36,6 @@ export class UsersResolver {
   @Mutation(() => User, { name: 'removeAUsers' })
   @UseGuards(JwtAuthGuard)
   removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.usersService.remove({ id: id });
+    return this.usersService.remove({ id });
   }
 }

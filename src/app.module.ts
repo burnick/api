@@ -12,6 +12,7 @@ import { configService } from './config/config.service';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { GraphQLError, GraphQLFormattedError } from 'graphql';
     }),
     UsersModule,
     AuthModule,
+    RolesModule,
   ],
   // controllers: [AppController],
   //providers: [AppService, PrismaService],
