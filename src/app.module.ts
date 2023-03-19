@@ -40,6 +40,6 @@ import { RolesModule } from './roles/roles.module';
     RolesModule,
   ],
   // controllers: [AppController],
-  //providers: [AppService, PrismaService],
+  // providers: [AppService, PrismaService],
 })
 export class AppModule {}
