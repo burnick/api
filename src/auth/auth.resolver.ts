@@ -1,6 +1,7 @@
 import {
   Args,
   Context,
+  Int,
   Mutation,
   Resolver,
   Subscription,
@@ -35,7 +36,7 @@ export class AuthResolver {
     return this.authService.signup(loginUserInput);
   }
 
-  @Subscription(() => Number, { name: 'totalNumberOfUsers' })
+  @Subscription(() => Int, { name: 'totalNumberOfUsers' })
   totalNumberOfUsers() {
     return pubSub.asyncIterator('totalNumberOfUsers');
   }
