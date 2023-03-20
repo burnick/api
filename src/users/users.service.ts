@@ -1,5 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 //import { Prisma } from '@prisma/client';
+import { v4 as uuidv4 } from 'uuid';
 import { PrismaService } from '../prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
@@ -27,6 +28,7 @@ export class UsersService {
     return await this.prisma.user.create({
       data: {
         ...createUserInput,
+        uuid: uuidv4(),
         name: username[0],
         roles: {
           connectOrCreate: {
@@ -46,10 +48,10 @@ export class UsersService {
     });
   }
 
-  async findOne(email: string): Promise<User> {
+  async findOne(uuid: string): Promise<User> {
     return await this.prisma.user.findUniqueOrThrow({
       where: {
-        email,
+        uuid,
       },
     });
   }
@@ -64,7 +66,7 @@ export class UsersService {
     });
   }
 
-  remove(userRemove: { id: number }) {
+  remove(userRemove: { uuid: string }) {
     return this.prisma.user.delete({
       where: userRemove,
     });

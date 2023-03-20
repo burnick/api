@@ -10,6 +10,9 @@ export class User extends BaseModel {
   @IsEmail()
   email: string;
 
+  @Field(() => String, { nullable: false })
+  uuid: string;
+
   @Field(() => String, { nullable: true })
   address?: string;
 
@@ -21,4 +24,7 @@ export class User extends BaseModel {
 
   @Field(() => [Role], { nullable: true })
   roles?: Role[];
+
+  @Field(() => Boolean, { nullable: false })
+  active: boolean;
 }

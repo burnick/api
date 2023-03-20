@@ -25,7 +25,7 @@ type Mutation {
   createRole(createRoleInput: CreateRoleInput!): Role!
   deleteRole(id: Int!): Role!
   login(loginUserInput: LoginUserInput!): LoginResponse!
-  removeAUsers(id: Int!): User!
+  removeAUsers(uuid: Int!): User!
   signup(loginUserInput: LoginUserInput!): User!
   updateAUsers(updateUserInput: UpdateUserInput!): User!
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
@@ -34,7 +34,7 @@ type Mutation {
 type Query {
   findAllRoles: [Role!]!
   findAllUsers: [User!]!
-  findOneUser(email: String!): User!
+  findOneUser(uuid: String!): User!
   fineOneRole(id: Int!): Role!
 }
 
@@ -63,6 +63,7 @@ input UpdateUserInput {
 }
 
 type User {
+  active: Boolean!
   address: String
 
   """Identifies the date and time when the object was created."""
@@ -74,4 +75,5 @@ type User {
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime!
+  uuid: String!
 }

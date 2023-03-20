@@ -26,8 +26,8 @@ export class UsersResolver {
   @Query(() => User, { name: 'findOneUser' })
   @UseGuards(JwtAuthGuard)
   @UseGuards(RolesGuard)
-  findOne(@Args('email') email: string) {
-    return this.usersService.findOne(email);
+  findOne(@Args('uuid') uuid: string) {
+    return this.usersService.findOne(uuid);
   }
 
   @Mutation(() => User, { name: 'updateAUsers' })
@@ -40,7 +40,7 @@ export class UsersResolver {
   @Mutation(() => User, { name: 'removeAUsers' })
   @UseGuards(JwtAuthGuard)
   @UseGuards(RolesGuard)
-  removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.usersService.remove({ id });
+  removeUser(@Args('uuid', { type: () => Int }) uuid: string) {
+    return this.usersService.remove({ uuid });
   }
 }
