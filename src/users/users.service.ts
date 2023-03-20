@@ -5,6 +5,9 @@ import { PrismaService } from '../prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './models/user.models';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubSub = new PubSub();
 
 @Injectable()
 export class UsersService {
@@ -69,6 +72,14 @@ export class UsersService {
   remove(userRemove: { uuid: string }) {
     return this.prisma.user.delete({
       where: userRemove,
+    });
+  }
+
+  async count() {
+    return await this.prisma.user.count({
+      where: {
+        active: true,
+      },
     });
   }
 }

@@ -69,7 +69,7 @@ export class AuthService {
     };
   }
 
-  async signup(loginUserInput: LoginUserInput) {
+  async signup(loginUserInput: LoginUserInput): Promise<User> {
     const password = await bcrypt.hash(loginUserInput.password, 10);
     return this.usersService.create({
       ...loginUserInput,
@@ -77,5 +77,9 @@ export class AuthService {
       password,
       updatedAt: new Date(),
     });
+  }
+
+  async count(): Promise<number> {
+    return await this.usersService.count();
   }
 }

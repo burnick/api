@@ -48,6 +48,10 @@ type Role {
   updatedAt: DateTime!
 }
 
+type Subscription {
+  totalNumberOfUsers: Float!
+}
+
 input UpdateRoleInput {
   id: Int!
   name: String
