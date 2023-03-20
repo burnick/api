@@ -30,6 +30,10 @@ class ConfigService {
   public getJWTSecret() {
     return this.getValue('JWT_SECRET', true);
   }
+
+  public getAllowedDomains() {
+    return this.getValue('WHITELIST_DOMAINS', true).split(' ');
+  }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
