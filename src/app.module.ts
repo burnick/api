@@ -21,6 +21,12 @@ import { RolesModule } from './roles/roles.module';
       sortSchema: true,
       playground: !configService.isProduction(),
       installSubscriptionHandlers: true,
+      // enable this for subscriptions
+      // subscriptions: {
+      //   'subscriptions-transport-ws': {
+      //     path: '/graphql',
+      //   },
+      // },
       formatError: (error: GraphQLError) => {
         const graphQLFormattedError: GraphQLFormattedError = {
           message: error.message,
