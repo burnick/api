@@ -9,10 +9,6 @@ export class PubSubService {
     this.pubSub = new PubSub();
   }
 
-  public get instance(): PubSub {
-    return this.pubSub;
-  }
-
   publish<T>(topic: string, payload: T) {
     return this.pubSub.publish(topic, payload);
   }

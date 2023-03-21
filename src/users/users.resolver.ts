@@ -21,7 +21,7 @@ export class UsersResolver {
     private pubSubService: PubSubService,
   ) {}
 
-  // This is moved to SignUp
+  // create user is moved to SignUp
   // @Mutation(() => User, { name: 'createAUser' })
   // createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
   //   return this.usersService.create(createUserInput);
