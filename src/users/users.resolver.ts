@@ -51,8 +51,8 @@ export class UsersResolver {
   @Mutation(() => User, { name: 'disableAUser' })
   @UseGuards(JwtAuthGuard)
   @UseGuards(RolesGuard)
-  disableUser(@Args('uuid', { type: () => String }) uuid: string) {
-    const result = this.usersService.disable(uuid);
+  async disableUser(@Args('uuid', { type: () => String }) uuid: string) {
+    const result = await this.usersService.disable(uuid);
     if (result) {
       this.pubSubService.publish('totalNumberOfUsers', {
         totalNumberOfUsers: this.usersService.count(),

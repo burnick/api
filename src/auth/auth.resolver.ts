@@ -23,8 +23,8 @@ export class AuthResolver {
   }
 
   @Mutation(() => User)
-  signup(@Args('loginUserInput') loginUserInput: LoginUserInput) {
-    const result = this.authService.signup(loginUserInput);
+  async signup(@Args('loginUserInput') loginUserInput: LoginUserInput) {
+    const result = await this.authService.signup(loginUserInput);
     if (result) {
       this.pubSubService.publish('totalNumberOfUsers', {
         totalNumberOfUsers: this.authService.count(),
