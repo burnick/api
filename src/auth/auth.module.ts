@@ -7,9 +7,11 @@ import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { configService } from 'src/config/config.service';
 import { JwtStrategy } from './jwt.strategy';
+import { EventModule } from '../event.module';
 
 @Module({
   imports: [
+    EventModule,
     PassportModule,
     UsersModule,
     JwtModule.register({
@@ -17,6 +19,7 @@ import { JwtStrategy } from './jwt.strategy';
       secret: configService.getJWTSecret(),
     }),
   ],
+
   providers: [AuthService, AuthResolver, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}

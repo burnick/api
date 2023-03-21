@@ -24,10 +24,10 @@ input LoginUserInput {
 type Mutation {
   createRole(createRoleInput: CreateRoleInput!): Role!
   deleteRole(id: Int!): Role!
+  disableAUser(uuid: String!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   removeAUsers(uuid: Int!): User!
   signup(loginUserInput: LoginUserInput!): User!
-  updateAUsers(updateUserInput: UpdateUserInput!): User!
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
 }
 
@@ -55,15 +55,6 @@ type Subscription {
 input UpdateRoleInput {
   id: Int!
   name: String
-}
-
-input UpdateUserInput {
-  address: String
-  email: String
-  id: Int!
-  name: String
-  password: String
-  updatedAt: DateTime
 }
 
 type User {

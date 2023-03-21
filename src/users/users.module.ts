@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersResolver } from './users.resolver';
 import { PrismaService } from '../prisma.service';
+import { EventModule } from '../event.module';
 
 @Module({
+  imports: [EventModule],
   providers: [UsersResolver, UsersService, PrismaService],
   exports: [UsersService],
 })

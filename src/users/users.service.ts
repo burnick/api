@@ -5,9 +5,6 @@ import { PrismaService } from '../prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './models/user.models';
-import { PubSub } from 'graphql-subscriptions';
-
-const pubSub = new PubSub();
 
 @Injectable()
 export class UsersService {
@@ -27,11 +24,12 @@ export class UsersService {
     if (!username[0]) {
       throw new BadRequestException('Wrong Email Format');
     }
+    const newUuid = await uuidv4();
 
     return await this.prisma.user.create({
       data: {
         ...createUserInput,
-        uuid: uuidv4(),
+        uuid: newUuid,
         name: username[0],
         roles: {
           connectOrCreate: {
@@ -39,12 +37,16 @@ export class UsersService {
             create: { name: 'User' },
           },
         },
+        active: true,
       },
     });
   }
 
   async findAll() {
     return await this.prisma.user.findMany({
+      where: {
+        active: true,
+      },
       include: {
         roles: true, // Return all fields
       },
@@ -64,6 +66,18 @@ export class UsersService {
       where,
       data: {
         ...updateUserInput,
+        updatedAt: new Date(),
+      },
+    });
+  }
+
+  disable(uuid: string) {
+    return this.prisma.user.update({
+      where: {
+        uuid,
+      },
+      data: {
+        active: false,
         updatedAt: new Date(),
       },
     });

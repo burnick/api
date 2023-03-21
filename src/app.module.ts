@@ -12,6 +12,8 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { RolesModule } from './roles/roles.module';
+import { PubSubService } from './pubSub.service';
+import { EventResolver } from './event.resolver';
 
 @Module({
   imports: [
@@ -20,13 +22,12 @@ import { RolesModule } from './roles/roles.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       playground: !configService.isProduction(),
-      installSubscriptionHandlers: true,
-      // enable this for subscriptions
-      // subscriptions: {
-      //   'subscriptions-transport-ws': {
-      //     path: '/graphql',
-      //   },
-      // },
+      // installSubscriptionHandlers: true,
+      subscriptions: {
+        // enable this for subscriptions
+        'graphql-ws': true,
+        'subscriptions-transport-ws': true,
+      },
       formatError: (error: GraphQLError) => {
         const graphQLFormattedError: GraphQLFormattedError = {
           message: error.message,
@@ -47,5 +48,7 @@ import { RolesModule } from './roles/roles.module';
   ],
   // controllers: [AppController],
   // providers: [AppService, PrismaService],
+  providers: [PubSubService, EventResolver],
+  exports: [PubSubService],
 })
 export class AppModule {}
