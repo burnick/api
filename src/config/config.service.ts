@@ -36,12 +36,5 @@ class ConfigService {
   }
 }
 
-const configService = new ConfigService(process.env).ensureValues([
-  // 'POSTGRES_HOST',
-  // 'POSTGRES_PORT',
-  // 'POSTGRES_USER',
-  // 'POSTGRES_PASSWORD',
-  // 'POSTGRES_DATABASE',
-]);
-
+const configService = new ConfigService(process.env);
 export { configService };
