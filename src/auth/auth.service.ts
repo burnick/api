@@ -44,7 +44,7 @@ export class AuthService {
     username,
     password,
   }: UserSignupInput): Promise<Partial<User>> {
-    const user = await this.usersService.findOne(username);
+    const user = await this.usersService.findOneByEmail(username);
     if (!user) {
       return null;
     }

@@ -53,6 +53,14 @@ export class UsersService {
     });
   }
 
+  async findOneByEmail(email: string): Promise<User> {
+    return await this.prisma.user.findUniqueOrThrow({
+      where: {
+        email,
+      },
+    });
+  }
+
   async findOne(uuid: string): Promise<User> {
     return await this.prisma.user.findUniqueOrThrow({
       where: {
