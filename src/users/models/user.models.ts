@@ -3,6 +3,7 @@ import { ObjectType, HideField, Field } from '@nestjs/graphql';
 import { IsEmail } from 'class-validator';
 import { BaseModel } from '../../common/models/base.models';
 import { Role } from 'src/roles/models/role.models';
+import { Restaurant } from 'src/restaurant/models/restaurant.models';
 
 @ObjectType()
 export class User extends BaseModel {
@@ -24,6 +25,9 @@ export class User extends BaseModel {
 
   @Field(() => [Role], { nullable: true })
   roles?: Role[];
+
+  @Field(() => [Restaurant], { nullable: true })
+  restaurants?: Restaurant[];
 
   @Field(() => Boolean, { nullable: false })
   active: boolean;

@@ -27,16 +27,16 @@ export class UsersResolver {
   //   return this.usersService.create(createUserInput);
   // }
 
-  @Query(() => [User], { name: 'findAllUsers' })
   @UseGuards(JwtAuthGuard)
   @UseGuards(RolesGuard)
+  @Query(() => [User], { name: 'findAllUsers' })
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Query(() => User, { name: 'findOneUser' })
   @UseGuards(JwtAuthGuard)
   @UseGuards(RolesGuard)
+  @Query(() => User, { name: 'findOneUser' })
   findOne(@Args('uuid') uuid: string) {
     return this.usersService.findOne(uuid);
   }

@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateRestaurantInput {
+  """Restaurant Name"""
+  name: String!
+  userId: Float!
+}
+
 input CreateRoleInput {
   name: String!
 }
@@ -22,20 +28,37 @@ input LoginUserInput {
 }
 
 type Mutation {
+  createRestaurant(createRestaurantInput: CreateRestaurantInput!): Restaurant!
   createRole(createRoleInput: CreateRoleInput!): Role!
   deleteRole(id: Int!): Role!
   disableAUser(uuid: String!): User!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   removeAUsers(uuid: Int!): User!
+  removeRestaurant(id: Int!): Restaurant!
   signup(loginUserInput: LoginUserInput!): User!
+  updateRestaurant(updateRestaurantInput: UpdateRestaurantInput!): Restaurant!
   updateRole(updateRoleInput: UpdateRoleInput!): Role!
 }
 
 type Query {
+  findAllRestaurants: [Restaurant!]!
   findAllRoles: [Role!]!
   findAllUsers: [User!]!
   findOneUser(uuid: String!): User!
   fineOneRole(id: Int!): Role!
+  restaurant(id: Int!): Restaurant!
+}
+
+type Restaurant {
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+  id: ID!
+
+  """Restaurant Name"""
+  name: String!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime!
 }
 
 type Role {
@@ -52,6 +75,14 @@ type Subscription {
   totalNumberOfUsers: Int!
 }
 
+input UpdateRestaurantInput {
+  id: Int!
+
+  """Restaurant Name"""
+  name: String
+  userId: Float
+}
+
 input UpdateRoleInput {
   id: Int!
   name: String
@@ -66,6 +97,7 @@ type User {
   email: String!
   id: ID!
   name: String!
+  restaurants: [Restaurant!]
   roles: [Role!]
 
   """Identifies the date and time when the object was last updated."""

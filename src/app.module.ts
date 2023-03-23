@@ -14,6 +14,7 @@ import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { RolesModule } from './roles/roles.module';
 import { PubSubService } from './pubSub.service';
 import { EventResolver } from './event.resolver';
+import { RestaurantModule } from './restaurant/restaurant.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { EventResolver } from './event.resolver';
     UsersModule,
     AuthModule,
     RolesModule,
+    RestaurantModule,
   ],
   // controllers: [AppController],
   // providers: [AppService, PrismaService],
