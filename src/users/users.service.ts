@@ -58,6 +58,9 @@ export class UsersService {
       where: {
         email,
       },
+      include: {
+        roles: true, // Return all fields
+      },
     });
   }
 
@@ -65,6 +68,9 @@ export class UsersService {
     return await this.prisma.user.findUniqueOrThrow({
       where: {
         uuid,
+      },
+      include: {
+        roles: true, // Return all fields
       },
     });
   }
