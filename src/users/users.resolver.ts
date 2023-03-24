@@ -48,9 +48,9 @@ export class UsersResolver {
   //   return this.usersService.update({ ...updateUserInput }, updateUserInput);
   // }
 
-  @Mutation(() => User, { name: 'disableAUser' })
   @UseGuards(JwtAuthGuard)
   @UseGuards(RolesGuard)
+  @Mutation(() => User, { name: 'disableAUser' })
   async disableUser(@Args('uuid', { type: () => String }) uuid: string) {
     const result = await this.usersService.disable(uuid);
     if (result) {
@@ -60,10 +60,9 @@ export class UsersResolver {
     }
     return result;
   }
-
-  @Mutation(() => User, { name: 'removeAUsers' })
   @UseGuards(JwtAuthGuard)
   @UseGuards(RolesGuard)
+  @Mutation(() => User, { name: 'removeAUsers' })
   removeUser(@Args('uuid', { type: () => Int }) uuid: string) {
     return this.usersService.remove({ uuid });
   }
