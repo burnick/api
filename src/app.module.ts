@@ -21,7 +21,7 @@ import { RestaurantModule } from './restaurant/restaurant.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true,
+      sortSchema: true,                                                  
       playground: !configService.isProduction(),
       // installSubscriptionHandlers: true,
       subscriptions: {
